@@ -109,7 +109,40 @@
                 }
                 ?>
             </div>
+
+                <!-- Kalkulator Konversi Berat -->
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h2 class="text-2xl font-bold text-center mb-4">Konversi Berat</h2>
+                <form action="" method="post" class="space-y-4">
+                    <input type="hidden" name="form_type" value="konversi_berat">
+                    <input type="number" name="jumlah" placeholder="Masukkan berat" step="any" class="w-full p-2 border rounded-md" required>
+                    <select name="jenis" class="w-full p-2 border rounded-md" required>
+                        <option value="kg_to_g">Kilogram (kg) ke Gram (g)</option>
+                        <option value="g_to_kg">Gram (g) ke Kilogram (kg)</option>
+                    </select>
+                    <input type="submit" value="Konversi" class="w-full bg-purple-500 text-white py-2 rounded-md hover:bg-purple-600">
+                </form>
+                <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['form_type'] == "konversi_berat") {
+                    $jumlah = floatval($_POST["jumlah"]);
+                    $jenis = $_POST["jenis"];
+                    echo "<div class='mt-4 p-4 bg-gray-100 rounded-md'>";
+                    echo "<h3 class='font-medium'>Hasil Konversi:</h3>";
+                    if ($jenis == "kg_to_g") {
+                        $hasil = $jumlah * 1000;
+                        echo "<p class='text-purple-600 font-bold'>{$jumlah} kg = {$hasil} g</p>";
+                    } else {
+                        $hasil = $jumlah / 1000;
+                        echo "<p class='text-purple-600 font-bold'>{$jumlah} g = {$hasil} kg</p>";
+                    }
+                    echo "</div>";
+                }
+                ?>
+            </div>
         </div>
     </div>
+
+
+
 </body>
 </html>
